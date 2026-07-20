@@ -6,6 +6,15 @@
     <meta name="description" content="Akash Choudhuri — PhD candidate in Computer Science at the University of Iowa, working on machine learning for healthcare, hypergraphs, and uncertainty quantification.">
     <meta name="theme-color" content="#173b63">
     <title>Akash Choudhuri | Machine Learning Researcher</title>
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = savedTheme || (prefersDark ? "dark" : "light");
+      } catch (error) {
+        document.documentElement.dataset.theme = "light";
+      }
+    </script>
     <link rel="stylesheet" href="assets/css/portfolio.css">
   </head>
   <body>
@@ -26,6 +35,11 @@
           <a class="nav-link" href="#presentations">Presentations</a>
           <a class="nav-link" href="#contact">Contact</a>
         </nav>
+
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+          <span class="theme-toggle__icon" aria-hidden="true">◐</span>
+          <span class="theme-toggle__label">Dark mode</span>
+        </button>
 
         <div class="sidebar-links" aria-label="External profiles">
           <a href="assets/Resume-39.pdf">CV</a>
@@ -224,5 +238,6 @@
         </footer>
       </main>
     </div>
+    <script src="assets/js/theme.js"></script>
   </body>
 </html>
