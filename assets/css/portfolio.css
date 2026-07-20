@@ -11,9 +11,37 @@
   --green: #28734e;
   --red: #a23b3b;
   --violet: #6b4b8a;
+  --surface: #fafbfc;
+  --surface-hover: #eef4f9;
+  --nav-hover: rgba(255, 255, 255, 0.72);
+  --on-accent: #ffffff;
+  --contact-bg: #0d2a49;
+  --contact-text: #ffffff;
   --serif: Georgia, "Times New Roman", serif;
   --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --content: 1080px;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --navy: #8fc3f1;
+  --navy-dark: #e4edf6;
+  --ink: #e5eaf0;
+  --muted: #aeb8c4;
+  --line: #344452;
+  --paper: #10171f;
+  --sidebar: #17222c;
+  --soft-blue: #1b2c3a;
+  --gold: #e5ad51;
+  --green: #70c796;
+  --red: #ef8a8a;
+  --violet: #c2a0e0;
+  --surface: #151f28;
+  --surface-hover: #1b2c3a;
+  --nav-hover: rgba(143, 195, 241, 0.1);
+  --on-accent: #0d2a49;
+  --contact-bg: #203b55;
+  --contact-text: #f5f8fb;
 }
 
 * {
@@ -32,6 +60,7 @@ body {
   font-size: 17px;
   line-height: 1.7;
   text-rendering: optimizeLegibility;
+  transition: color 180ms ease, background-color 180ms ease;
 }
 
 a {
@@ -98,7 +127,7 @@ summary:focus-visible {
   height: 42px;
   flex: 0 0 42px;
   place-items: center;
-  color: white;
+  color: var(--on-accent);
   background: var(--navy);
   border-radius: 50%;
   font-family: var(--serif);
@@ -130,8 +159,33 @@ summary:focus-visible {
 
 .nav-link:hover,
 .nav-link.is-active {
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--nav-hover);
   border-left-color: var(--navy);
+}
+
+.theme-toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.5rem;
+  padding: 0.55rem 0.65rem;
+  color: var(--navy-dark);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  cursor: pointer;
+  font: 700 0.78rem/1.2 var(--sans);
+  letter-spacing: 0.025em;
+}
+
+.theme-toggle:hover {
+  background: var(--nav-hover);
+}
+
+.theme-toggle__icon {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .sidebar-links {
@@ -251,7 +305,7 @@ h3 {
 .portrait-wrap {
   margin: 0;
   padding: 0.45rem;
-  background: white;
+  background: var(--paper);
   border: 1px solid #cdd4dc;
 }
 
@@ -283,7 +337,7 @@ h3 {
   justify-content: center;
   padding: 0.48rem 1rem;
   color: var(--navy-dark);
-  background: white;
+  background: var(--paper);
   border: 1px solid var(--navy);
   border-radius: 3px;
   font-size: 0.88rem;
@@ -293,12 +347,12 @@ h3 {
 }
 
 .button:hover {
-  color: white;
+  color: var(--on-accent);
   background: var(--navy-dark);
 }
 
 .button--primary {
-  color: white;
+  color: var(--on-accent);
   background: var(--navy);
 }
 
@@ -430,13 +484,13 @@ h3 {
 .publication {
   position: relative;
   padding: 1.35rem 1.45rem 1.25rem;
-  background: white;
+  background: var(--paper);
   border: 1px solid var(--line);
   border-left: 3px solid #aeb7c2;
 }
 
 .publication--featured {
-  background: linear-gradient(90deg, var(--soft-blue), #fff 70%);
+  background: linear-gradient(90deg, var(--soft-blue), var(--paper) 70%);
   border-left-color: var(--navy);
 }
 
@@ -493,13 +547,13 @@ h3 {
   justify-content: space-between;
   padding: 1rem 1.1rem;
   color: var(--navy-dark);
-  background: #fafbfc;
+  background: var(--surface);
   border: 1px solid var(--line);
   text-decoration: none;
 }
 
 .presentation:hover {
-  background: var(--soft-blue);
+  background: var(--surface-hover);
   border-color: #aebed0;
 }
 
@@ -538,6 +592,19 @@ h3 {
   grid-template-columns: minmax(0, 1fr) minmax(250px, 0.8fr);
   gap: 3rem;
   align-items: end;
+}
+
+.contact {
+  padding-right: 2rem;
+  padding-left: 2rem;
+  background: var(--contact-bg);
+}
+
+.contact h2,
+.contact p,
+.contact a,
+.contact-links {
+  color: var(--contact-text);
 }
 
 .contact h2 {
@@ -599,6 +666,23 @@ h3 {
   .site-mark__name,
   .sidebar-links {
     display: none;
+  }
+
+  .theme-toggle {
+    width: auto;
+    flex: 0 0 auto;
+    margin: 0 0 0 auto;
+  }
+
+  .theme-toggle__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .nav-list {
@@ -704,6 +788,10 @@ h3 {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  body {
+    transition: none;
   }
 }
 
